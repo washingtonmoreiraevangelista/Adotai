@@ -1,0 +1,12 @@
+
+// Define o cliente Prisma que será gerado com base no schema
+generator Client {
+  provider = "prisma-client-js"
+}
+
+//Define de onde o Prisma vai se conectar para acessar os dados
+datasource db {
+  provider = "postgresql"
+  url =  env("DATABASE_URL")
+}
+

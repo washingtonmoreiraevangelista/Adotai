@@ -1,0 +1,77 @@
+# 🧩 docker-compose.yml (com explicação)
+# yaml
+# Copiar
+# Editar
+# version: '3.8'  # Versão do docker-compose (padrão atual)
+
+# services: # Aqui definimos os "serviços" que o Docker vai subir (app, banco, etc)
+
+#   db: # Nome do serviço (PostgreSQL)
+#     image: bitnami/postgresql # Imagem do PostgreSQL da Bitnami (já vem pronta)
+#     container_name: api-solid-pg # Nome do container
+#     ports:
+#       - "5432:5432" # Porta externa : porta interna
+#     environment:
+#       - POSTGRESQL_USERNAME=docker # Usuário do banco
+#       - POSTGRESQL_PASSWORD=docker # Senha
+#       - POSTGRESQL_DATABASE=apisolid # Nome do banco
+#     volumes:
+#       - postgres-data:/bitnami/postgresql # Volume para persistir os dados do banco
+
+#   app: # Serviço da sua API
+#     build: . # Usa o Dockerfile da raiz
+#     container_name: api-solid-app
+#     ports:
+#       - "3333:3333" # Porta externa : interna (Fastify ou outro framework)
+#     environment:
+#       - DATABASE_URL=postgresql://docker:docker@db:5432/apisolid # Conexão com o banco (via nome do serviço `db`)
+#     volumes:
+#       - .:/app # Monta o código local na pasta /app do container
+#       - /app/node_modules # Garante que o node_modules do container não conflite com o local
+#     depends_on:
+#       - db # Só sobe a app depois que o banco estiver de pé
+
+# volumes: # Define volumes compartilhados
+#   postgres-data:
+# 🚀 Comandos principais
+# bash
+# Copiar
+# Editar
+# # Subir os containers
+# docker-compose up --build
+
+# # Subir em segundo plano
+# docker-compose up -d
+
+# # Acessar o container da app
+# docker-compose exec app sh
+
+# # Derrubar tudo
+# docker-compose down
+# 🧠 Resumo das principais palavras-chave do YML
+# Palavra-chave	O que faz
+# version	Versão do arquivo de orquestração do Docker Compose
+# services	Define os serviços (API, banco, etc.)
+# image	Imagem do container a ser usada
+# build	Caminho onde está o Dockerfile
+# ports	Mapeamento de portas do host para o container
+# environment	Variáveis de ambiente (ex: credenciais)
+# volumes	Monta diretórios persistentes ou espelhados
+# depends_on	Define a ordem de dependência entre os serviços
+# container_name	Nome personalizado do container Docker
+
+
+
+
+version: '3.8'
+
+services:
+
+  Adotai:
+    image: bitnami/postgresql
+    ports:
+      - "5433:5433"
+    environment:
+       - POSTGRESQL_USERNAME=docker
+       - POSTGRESQL_PASSWORD=docker
+       - POSTGRESQL_DATABASE=adotai
