@@ -1,4 +1,5 @@
 import { UserOngsRepository } from '@/repository/userOngs.repository'
+import { CreateOngsUseCase } from '@/services/createOngs.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import z from 'zod'
 
@@ -7,25 +8,26 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     name: z.string(),
     phone: z.string(),
     email: z.string().email(),
-    password_hash: z.string().min(6),
+    password: z.string().min(6),
     address: z.string(),
     city: z.string()
   })
 
-  const { name, phone, email, password_hash, address, city } = registerBodySchema.parse(request.body)
+  const { name, phone, email, password, address, city } = registerBodySchema.parse(request.body)
 
   try {
 
-    const service = new UserOngsRepository()
+    const userRepository = new UserOngsRepository()
+    const createOngsUseCase = new CreateOngsUseCase(userRepository)
 
-    await service.create({
-      name,
-      phone,
-      email,
-      password_hash,
-      address,
-      city
-    })
+      await createOngsUseCase.create({
+        name,
+        address,
+        city,
+        email,
+        password,
+        phone
+      })
 
   } catch (error) {
 

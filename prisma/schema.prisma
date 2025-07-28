@@ -11,7 +11,7 @@ datasource db {
 
 enum Role {
   ADMIN
-  MENBER
+  MEMBER
 }
 
 
@@ -23,7 +23,7 @@ model Ongs {
   password_hash String
   address       String
   city          String
-  role          Role     @default(MENBER)
+  role          Role     @default(MEMBER)
   created_At     DateTime @default(now())
 
   pets          Pets[] 

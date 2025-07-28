@@ -1,12 +1,8 @@
 export interface Ongs {
-
-  name: string
+ name: string
+  email: string
   phone: string
-  email: string 
-  password_hash: string
   address: string
   city: string
-  role: string
-  created_At: string
-
+  password: string
 }

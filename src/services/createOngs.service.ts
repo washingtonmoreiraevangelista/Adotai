@@ -9,9 +9,9 @@ export class CreateOngsUseCase {
     private createOngsRepository: UserOngsRepository
   ) { }
 
-  async createOngs({ name, email, phone, address, password_hash}: Ongs) {
+  async create({ name, email, phone, address, password, city}: Ongs) {
 
-    const passwordHashed = await hash(password_hash, 6)
+    const passwordHashed = await hash(password, 6)
 
     const userWithSameEmail = await this.createOngsRepository.findByEmail(email)
 
@@ -25,6 +25,7 @@ export class CreateOngsUseCase {
       address,
       password_hash: passwordHashed,
       phone,
+      city
     })
 
     return { ongs }

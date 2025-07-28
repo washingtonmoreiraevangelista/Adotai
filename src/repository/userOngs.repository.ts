@@ -10,9 +10,9 @@ export class UserOngsRepository{
   }
 
   async findByEmail(email: string) {
-    const ong = await prisma.ongs.findFirst({
+    const ong = await prisma.ongs.findUnique({
       where: {
-        email
+        email,
       }
     })
 
