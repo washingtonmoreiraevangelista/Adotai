@@ -22,6 +22,7 @@ model Ongs {
   email         String @unique
   password_hash String
   address       String
+  city          String
   role          Role     @default(MENBER)
   created_At     DateTime @default(now())
 

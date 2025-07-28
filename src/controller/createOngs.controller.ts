@@ -9,9 +9,10 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     email: z.string().email(),
     password_hash: z.string().min(6),
     address: z.string(),
+    city: z.string()
   })
 
-  const { name, phone, email, password_hash, address } = registerBodySchema.parse(request.body)
+  const { name, phone, email, password_hash, address, city } = registerBodySchema.parse(request.body)
 
   try {
 
@@ -22,7 +23,8 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       phone,
       email,
       password_hash,
-      address
+      address,
+      city
     })
 
   } catch (error) {
@@ -35,6 +37,6 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
   }
 
-  return reply.status(201).send
+  return reply.status(201).send()
 
 }
