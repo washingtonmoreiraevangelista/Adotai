@@ -4,7 +4,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 
-export async function listPetsByCity(request: FastifyRequest, reply: FastifyReply) {
+export async function listByPets(request: FastifyRequest, reply: FastifyReply) {
   const querySchema = z.object({
     city: z.string().optional(),
     type: z.string().optional(),

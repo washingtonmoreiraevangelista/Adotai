@@ -1,6 +1,7 @@
 import { authenticate } from '@/controller/authenticate.controller'
 import { register } from '@/controller/createOngs.controller'
-import { listPetsByCity } from '@/controller/get-pet.controller'
+import { listByPets } from '@/controller/get-pet.controller'
+import { getPet } from '@/controller/getPet.controller'
 import { getProfile } from '@/controller/profile.controller'
 import { registerPet } from '@/controller/register-pets.controller'
 import { verifyJwt } from '@/middlewares/verify-jwt'
@@ -14,7 +15,8 @@ export async function routes(app: FastifyInstance) {
   app.post('/sessions', authenticate)
 
   // Pets
-  app.post('/pets/register', { onRequest: [verifyJwt, verifyRole('ADMIN')]}, registerPet)
-  app.get('/pets', { onRequest: [verifyJwt, verifyRole('ADMIN')]}, listPetsByCity)
+  app.get('/pet/:id', getPet)
+  app.get('/pets', listByPets)
+  app.post('/pet/register', { onRequest: [verifyJwt, verifyRole('ADMIN')] }, registerPet)
 
 }

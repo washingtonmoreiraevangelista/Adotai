@@ -10,6 +10,6 @@ export async function getPet(request: FastifyRequest, reply: FastifyReply) {
 
   const { pet } = await service.execute(id)
 
-  return reply.send({ pet })
-  
+  return reply.send( pet )
+
 }

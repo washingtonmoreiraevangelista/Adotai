@@ -11,14 +11,14 @@ export class ListPetsByCity {
 
   async execute(filters: GetPetRequest): Promise<GetPetResponse> {
 
-    const allPets = await this.registerPetRepository.findByCity()
+    const allPets = await this.registerPetRepository.findAllPets()
 
     const filteredPets = allPets.filter(pet => {
       const matchCity = filters.city ? normalize(pet.city) === normalize(filters.city) : true
-      const matchType = filters.type ? pet.type === filters.type : true
-      const matchRaca = filters.raca ? pet.raca === filters.raca : true
-      const matchIdade = filters.idade ? pet.idade === filters.idade : true
-      const matchSize = filters.size ? pet.size === filters.size : true
+      const matchType = filters.type ? normalize(pet.type) === normalize(filters.type) : true
+      const matchRaca = filters.raca ? normalize(pet.raca) === normalize(filters.raca) : true
+      const matchIdade = filters.idade ? normalize(pet.idade) === normalize(filters.idade) : true
+      const matchSize = filters.size ? normalize(pet.size) === normalize(filters.size) : true
       const matchAvailable = pet.adopted === false
 
       return matchCity && matchType && matchRaca && matchIdade && matchSize && matchAvailable

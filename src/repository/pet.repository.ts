@@ -9,7 +9,7 @@ export class PetRepository {
     return pets
   }
 
-  async findByCity() {
+  async findAllPets() {
     const pet = await prisma.pets.findMany()
 
     return pet
@@ -19,7 +19,8 @@ export class PetRepository {
       where: {
         id
       }
-    })
+    }) 
+    return pet
   }
 
 
