@@ -1,5 +1,5 @@
 import { PetRepository } from '@/repository/pet.repository'
-import { ListPetsByCity } from '@/services/getAllPet.service'
+import { ListByPets } from '@/services/get-Pet-descrition.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -16,7 +16,7 @@ export async function listByPets(request: FastifyRequest, reply: FastifyReply) {
   const filters = querySchema.parse(request.query)
 
   const registerPetRepository = new PetRepository()
-  const petService = new ListPetsByCity(registerPetRepository)
+  const petService = new ListByPets(registerPetRepository)
 
   const { pet } = await petService.execute(filters)
 

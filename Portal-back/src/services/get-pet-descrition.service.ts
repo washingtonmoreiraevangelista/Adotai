@@ -3,7 +3,7 @@ import { GetPetRequest, GetPetResponse } from '@/interface/get-pet.interface'
 import { PetRepository } from '@/repository/pet.repository'
 import { normalize } from '@/utils/normalize'
 
-export class ListPetsByCity {
+export class ListByPets{
   constructor(
     private registerPetRepository: PetRepository
 
@@ -11,7 +11,7 @@ export class ListPetsByCity {
 
   async execute(filters: GetPetRequest): Promise<GetPetResponse> {
 
-    const allPets = await this.registerPetRepository.findAllPets()
+    const allPets = await this.registerPetRepository.findByDescription()
 
     const filteredPets = allPets.filter(pet => {
       const matchCity = filters.city ? normalize(pet.city) === normalize(filters.city) : true
@@ -33,4 +33,5 @@ export class ListPetsByCity {
       pet: filteredPets
     }
   }
+  
 }

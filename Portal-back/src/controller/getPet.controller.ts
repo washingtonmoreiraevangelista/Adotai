@@ -1,5 +1,5 @@
 import { PetRepository } from '@/repository/pet.repository'
-import { GetPetByIdService } from '@/services/getPet.service'
+import { GetPetByIdService } from '@/services/get-pet.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function getPet(request: FastifyRequest, reply: FastifyReply) {

@@ -9,12 +9,13 @@ export class PetRepository {
     return pets
   }
 
-  async findAllPets() {
+  async findByDescription() {
     const pet = await prisma.pets.findMany()
 
     return pet
   }
-  async findByid(id: string) {
+
+  async findById(id: string) {
     const pet = await prisma.pets.findUnique({
       where: {
         id
@@ -23,5 +24,18 @@ export class PetRepository {
     return pet
   }
 
+  async updatePet(id: string, adopted: boolean) {
+
+    const updatedPet  = await prisma.pets.update({
+      where: {
+        id
+      },
+      data: {
+        adopted
+      }
+    })
+
+    return updatedPet
+  }
 
 }

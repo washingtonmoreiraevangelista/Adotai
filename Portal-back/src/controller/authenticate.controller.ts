@@ -1,5 +1,5 @@
 import { InvalidCredentialError } from '@/error/invalide-credential.error'
-import { UserOngsRepository } from '@/repository/userOngs.repository'
+import { OngsRepository } from '@/repository/ongs.repository'
 import { AuthenticateService } from '@/services/authenticate.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
@@ -15,7 +15,7 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
 
   try {
 
-    const userRepository = new UserOngsRepository()
+    const userRepository = new OngsRepository()
     const authenticateService = new AuthenticateService(userRepository)
 
     const { ong } = await authenticateService.execute({
@@ -30,12 +30,32 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
       {
         sign: {
           sub: ong.id,
-          expiresIn: '10m'
         },
-      }
-    )
+      })
 
-    return reply.status(200).send({ token })
+    // reflesh token
+    const refleshToken = await reply.jwtSign(
+      {
+        role: ong.role
+      },
+      {
+        sign: {
+          sub: ong.id,
+          expiresIn: '7d'
+        },
+      })
+
+    return reply
+      .setCookie('refreshToken', refleshToken, {
+        path: '/',
+        secure: true,
+        sameSite: true,
+        httpOnly: true
+      })
+      .status(200)
+      .send({
+        token,
+      })
 
   } catch (error) {
 

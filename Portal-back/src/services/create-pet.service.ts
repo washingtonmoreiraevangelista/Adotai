@@ -1,14 +1,14 @@
 import { ResourceNotFoundError } from '@/error/resource-not-found.error'
 import { Pets } from '@/interface/register-pets.interface'
+import { OngsRepository } from '@/repository/ongs.repository'
 import { PetRepository } from '@/repository/pet.repository'
-import { UserOngsRepository } from '@/repository/userOngs.repository'
 
 export class RegisterPet {
 
   constructor(
 
     private registerPest: PetRepository,
-    private userOngsRepository: UserOngsRepository
+    private userOngsRepository: OngsRepository
 
   ) { }
 

@@ -1,5 +1,5 @@
-import { UserOngsRepository } from '@/repository/userOngs.repository'
-import { CreateOngsUseCase } from '@/services/createOngs.service'
+import {OngsRepository } from '@/repository/ongs.repository'
+import { CreateOngsUseCase } from '@/services/create-ongs.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import z from 'zod'
 
@@ -17,17 +17,17 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
   try {
 
-    const userRepository = new UserOngsRepository()
+    const userRepository = new OngsRepository()
     const createOngsUseCase = new CreateOngsUseCase(userRepository)
 
-      await createOngsUseCase.create({
-        name,
-        address,
-        city,
-        email,
-        password,
-        phone
-      })
+    await createOngsUseCase.create({
+      name,
+      address,
+      city,
+      email,
+      password,
+      phone
+    })
 
   } catch (error) {
 

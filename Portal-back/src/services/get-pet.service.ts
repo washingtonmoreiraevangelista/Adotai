@@ -1,4 +1,3 @@
-import { ResourceNotFoundError } from '@/error/resource-not-found.error'
 import { PetRepository } from '@/repository/pet.repository'
 
 export class GetPetByIdService {
@@ -8,7 +7,7 @@ export class GetPetByIdService {
 
    async execute (id: string) {
 
-    const pet = await this.petRepository.findByid(id)
+    const pet = await this.petRepository.findById(id)
 
     return {
       pet

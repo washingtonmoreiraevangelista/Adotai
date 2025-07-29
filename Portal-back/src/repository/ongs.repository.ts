@@ -1,7 +1,7 @@
 import { prisma } from '@/libs/prisma'
 import { Prisma } from '@prisma/client'
 
-export class UserOngsRepository{
+export class OngsRepository{
 
   async create(data: Prisma.OngsCreateInput) {
     const ongs = await prisma.ongs.create({data})

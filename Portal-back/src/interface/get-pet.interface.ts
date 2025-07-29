@@ -1,11 +1,12 @@
 import { Pets } from '@prisma/client'
 
 export interface GetPetRequest {
-  city?: string;
-  type?: string;
-  raca?: string;
-  idade?: string;
-  size?: string;
+  city?: string
+  type?: string
+  raca?: string
+  idade?: string
+  size?: string
+  search?: string
 }
 
 export interface GetPetResponse {

@@ -1,11 +1,11 @@
 import { InvalidCredentialError } from '@/error/invalide-credential.error'
 import { AuthenticateRequest, AuthenticateResponse } from '@/interface/authneticate.interface'
-import { UserOngsRepository } from '@/repository/userOngs.repository'
+import { OngsRepository } from '@/repository/ongs.repository'
 import { compare } from 'bcryptjs'
 
 export class AuthenticateService {
   constructor(
-    private userOngsRepository: UserOngsRepository
+    private userOngsRepository: OngsRepository
   ) { }
 
   async execute({ email, password }: AuthenticateRequest): Promise<AuthenticateResponse> {

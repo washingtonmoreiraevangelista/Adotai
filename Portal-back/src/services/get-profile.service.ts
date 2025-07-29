@@ -1,18 +1,18 @@
 import { ResourceNotFoundError } from '@/error/resource-not-found.error'
-import { GetProfileRequest, GetProfileResponse } from '@/interface/getOngs.interface'
-import { UserOngsRepository } from '@/repository/userOngs.repository'
+import { GetProfileRequest, GetProfileResponse } from '@/interface/get-ongs.interface'
+import { OngsRepository } from '@/repository/ongs.repository'
 
 export class GetProfile {
 
   constructor(
-    private userOngsRepository: UserOngsRepository
+    private userOngsRepository: OngsRepository
   ) { }
 
   async execute({ userId }: GetProfileRequest): Promise<GetProfileResponse> {
     const user = await this.userOngsRepository.findById(userId)
 
-    if(!user) {
-       throw new ResourceNotFoundError()
+    if (!user) {
+      throw new ResourceNotFoundError()
     }
 
     return {

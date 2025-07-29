@@ -1,15 +1,15 @@
 import { UserError } from '@/error/user.error'
 import { Ongs } from '@/interface/ongs.interface'
-import { UserOngsRepository } from '@/repository/userOngs.repository'
+import { OngsRepository } from '@/repository/ongs.repository'
 import { hash } from 'bcryptjs'
 
 export class CreateOngsUseCase {
 
   constructor(
-    private createOngsRepository: UserOngsRepository
+    private createOngsRepository: OngsRepository
   ) { }
 
-  async create({ name, email, phone, address, password, city}: Ongs) {
+  async create({ name, email, phone, address, password, city }: Ongs) {
 
     const passwordHashed = await hash(password, 6)
 
