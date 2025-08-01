@@ -9,13 +9,34 @@ export class PetRepository {
     return pets
   }
 
-  async findByDescription() {
-    const pet = await prisma.pets.findMany()
+  async findAllPets( page: number, limit: number) {
+    const pets = await prisma.pets.findMany({
+      skip: (page - 1) * limit,
+      take: limit
+    })
+    const total = await prisma.pets.count()
 
-    return pet
+    return { pets, total, page, limit }
   }
 
-  async findById(id: string) {
+// async findPets(filters: any, page: number, limit: number) {
+//   const skip = (page - 1) * limit
+
+//   const pets = await prisma.pets.findMany({
+//     where: filters, 
+//     skip,      
+//     take: limit,    
+//   })
+
+//   const total = await prisma.pets.count({
+//     where: filters,
+//   })
+
+//   return { pets, total }
+// }
+
+
+  async findByPetId(id: string) {
     const pet = await prisma.pets.findUnique({
       where: {
         id

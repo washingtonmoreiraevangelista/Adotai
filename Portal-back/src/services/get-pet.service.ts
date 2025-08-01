@@ -7,7 +7,7 @@ export class GetPetByIdService {
 
    async execute (id: string) {
 
-    const pet = await this.petRepository.findById(id)
+    const pet = await this.petRepository.findByPetId(id)
 
     return {
       pet

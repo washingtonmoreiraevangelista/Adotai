@@ -1,6 +1,6 @@
 import { authenticate } from '@/controller/authenticate.controller'
 import { register } from '@/controller/create-ongs.controller'
-import { getPet, listByPets, registerPet, updatePet } from '@/controller/pet.controller'
+import { getAllPets, getPet, registerPet, updatePet } from '@/controller/pet.controller'
 import { getProfile } from '@/controller/profile.controller'
 import { refresh } from '@/controller/reflesh.controller'
 import { verifyJwt } from '@/middlewares/verify-jwt'
@@ -16,7 +16,8 @@ export async function routes(app: FastifyInstance) {
 
   // Pets
   app.get('/pet/:id', getPet)
-  app.get('/pets', listByPets)
+  app.get('/pet/all', getAllPets)
+  // app.get('/pet', listByPets)
   app.post('/pet/register', { onRequest: [verifyJwt, verifyRole('ADMIN')] }, registerPet)
   app.patch('/pet/:id', { onRequest: [verifyJwt, verifyRole('ADMIN')] }, updatePet)
 

@@ -1,11 +1,16 @@
-export interface Pets {
+export type PetType = 'DOG' | 'CAT' | 'BIRD' | 'OTHER'
+export type PetSize = 'SMALL' | 'MEDIUM' | 'LARGE'
 
-  ongId: string
+export interface Pet {
   name: string
   description: string
-  type: string
+  type: PetType
   raca: string
-  idade: string
+  age: string
   city: string
-  size: string
+  size: PetSize
+  adopted: boolean
+  created_At: string 
+  photoUrl: string
+  ongId: string
 }
