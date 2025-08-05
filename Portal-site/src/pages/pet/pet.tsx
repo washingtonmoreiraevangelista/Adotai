@@ -31,7 +31,6 @@ export const PetsPage = () => {
     fetchPets()
   }, [])
 
-  // Atualizando totalPages para levar em conta a quantidade de pets disponíveis
   const totalPages = Math.ceil(pets.length / petsPerPage)
 
   const paginatedPets = useMemo(() => {
@@ -54,7 +53,7 @@ export const PetsPage = () => {
         backgroundPosition: "center",
       }}
     >
-      <Container sx={{ maxWidth: 800, textAlign: 'center', pt: 6 }}>
+      {/* <Container sx={{ maxWidth: 800, textAlign: 'center', pt: 6 }}>
         <Typography
           variant="h3"
           component="h1"
@@ -72,7 +71,7 @@ export const PetsPage = () => {
         <Typography variant="h6" color="text.secondary" mb={6}>
           Siga sua nutrição diária de forma inteligente
         </Typography>
-      </Container>
+      </Container> */}
 
       <Container sx={{ maxWidth: 800, textAlign: 'center', mb: 4 }}>
         <Grid container spacing={1} justifyContent="center">

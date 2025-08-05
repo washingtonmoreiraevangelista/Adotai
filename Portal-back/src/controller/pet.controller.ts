@@ -3,10 +3,7 @@ import { GetPetByIdService, RegisterPet } from '@/services'
 import { ListAllPets } from '@/services/get-all-pets.service'
 import { UpdateByPet } from '@/services/update-pet.service'
 import { FastifyReply, FastifyRequest } from 'fastify'
-import path from 'path'
-import fs from 'fs'
 import z from 'zod'
-import { randomUUID } from 'crypto'
 
 export async function registerPet(request: FastifyRequest, reply: FastifyReply) {
   const PetTypeEnum = z.enum(['DOG', 'CAT', 'BIRD', 'OTHER'])
@@ -24,41 +21,7 @@ export async function registerPet(request: FastifyRequest, reply: FastifyReply) 
 
 
   const { name, description, type, raca, age, city, size } = await petsSchema.parse(request.body)
-  // Faz o upload do arquivo
-  const data = await request.file()
 
-  // Verifica se o arquivo foi enviado
-  if (!data) {
-    return reply.status(400).send({ error: 'Photo is required' })
-  }
-
-  // Gera um nome único para o arquivo
-  const filename = `${randomUUID()}${path.extname(data.filename)}`
-  const filepath = path.join(__dirname, '..', '..', 'uploads', filename)
-
-  // Verifica o tipo da imagem
-  if (data.mimetype !== 'image/jpeg' && data.mimetype !== 'image/png') {
-    return reply.status(400).send({ error: 'Invalid file type. Only JPEG and PNG are allowed.' })
-  }
-
-  // Cria o diretório se não existir
-  const uploadDir = path.join(__dirname, '..', '..', 'uploads')
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir)
-  }
-
-  // Salva o arquivo na pasta uploads/
-  await new Promise((resolve, reject) => {
-    const writeStream = fs.createWriteStream(filepath)
-    data.file.pipe(writeStream)
-    data.file.on('end', resolve)
-    data.file.on('error', reject)
-  })
-
-  // Caso não tenha os dados obrigatórios
-  if (!name || !description || !type || !raca || !age || !city || !size) {
-    return reply.status(400).send({ error: 'All fields are required' })
-  }
 
   const ongId = request.user.sub
 
@@ -75,9 +38,9 @@ export async function registerPet(request: FastifyRequest, reply: FastifyReply) 
     city: city.toLowerCase().replace(/\s/g, ''),
     size,
     adopted: false,
-    photoUrl: filename,
     created_At: new Date().toISOString(),
-    ongId
+    ongId,
+    photoUrl:  '', 
   })
 
   return reply.status(201).send()

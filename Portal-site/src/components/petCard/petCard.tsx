@@ -98,7 +98,7 @@ export const PetCard = ({ pet, orgPhoneNumber }: PetCardProps) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Adotar via WhatsApp
+            Adotar 
           </Button>
         </CardActions>
       )}

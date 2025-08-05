@@ -30,18 +30,16 @@ app.register(fastifyJwt, {
   }
 })
 
-app.register(fastifyStatic, {
-  root: path.join(__dirname, '..', 'uploads'),
-  prefix: '/uploads/',
-})
-
-
 app.register(fastifyMultipart, {
   limits: {
     fileSize: 5 * 1024 * 1024,
   }
 })
 
+app.register(fastifyStatic, {
+  root: path.join(__dirname, '..', 'uploads'),
+  prefix: '/uploads/',
+})
 
 app.register(fastifyCookie)
 

@@ -12,20 +12,24 @@ import GroupIcon from "@mui/icons-material/Group"
 import type { Pet } from "../../interface/pet.interface"
 import { AdoptionModal } from '../../components/adotad-card/adotad'
 import { useNavigate } from 'react-router-dom'
+import { HorizontalScroll } from '../../components/scroll/horizontalScrollSection'
+import { Link } from 'react-router-dom'
 
 export const HomePage = () => {
   const [selectedPet] = useState<Pet | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
 
-
   const goToPets = () => {
     navigate('/pets')
   }
 
+  const handleAdocao = () => {
+    navigate('/adopt')
+  }
+
   return (
     <Box sx={{ backgroundColor: "#f4fcfc", minHeight: "100vh" }}>
-      {/* Hero */}
       <Box
         height="600px"
         position="relative"
@@ -58,7 +62,7 @@ export const HomePage = () => {
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
-            spacing={2}
+            spacing={1}
             justifyContent="center"
             mt={4}
           >
@@ -67,63 +71,91 @@ export const HomePage = () => {
             </Button>
 
             <Button
-              variant="outlined"
+              variant="contained"
               size="large"
               startIcon={<GroupIcon />}
               sx={{
-                borderColor: "white",
+                backgroundColor: "#FC7765",
                 color: "white",
+                boxShadow: "none",
                 "&:hover": {
-                  borderColor: "white",
-                  backgroundColor: "#f4fcfc",
+                  backgroundColor: "#FC7765",
+                  boxShadow: "none",
                 },
               }}
+              onClick={handleAdocao}
             >
               Como adotar
             </Button>
+
           </Stack>
         </Box>
       </Box>
 
       {/* Métricas */}
-      <Box py={12}>
+      <Box py={4}>
         <Container>
-          <Grid container spacing={8} justifyContent="center" textAlign="center">
-              <Typography variant="h4" fontWeight="bold" color="primary">
+          <Grid container spacing={40} justifyContent="center">
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h4" fontWeight="bold" color="primary" align="center">
                 500+
               </Typography>
-              <Typography color="text.secondary">Pets adotados</Typography>
-        
-              <Typography variant="h4" fontWeight="bold" color="primary">
+              <Typography color="text.secondary" align="center">
+                Pets adotados
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h4" fontWeight="bold" color="primary" align="center">
                 50+
               </Typography>
-              <Typography color="text.secondary">Parceiros</Typography>
-           
-              <Typography variant="h4" fontWeight="bold" color="primary">
+              <Typography color="text.secondary" align="center">
+                Parceiros
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h4" fontWeight="bold" color="primary" align="center">
                 100%
               </Typography>
-              <Typography color="text.secondary">Amor garantido</Typography>
+              <Typography color="text.secondary" align="center">
+                Amor garantido
+              </Typography>
+            </Grid>
           </Grid>
         </Container>
       </Box>
 
+      {/* Horizontal Scroll */}
+      <Box mt={3}>
+        <HorizontalScroll />
+      </Box>
 
       {/* CTA */}
-      <Box py={8} bgcolor="primary.light" textAlign="center">
+      <Box py={6} bgcolor="primary.light" textAlign="center">
         <Container>
           <Typography variant="h4" fontWeight="bold">
             Pronto para mudar uma vida?
           </Typography>
-          <Typography
-            variant="h6"
-            color="text.secondary"
-            maxWidth="600px"
-            mx="auto"
-            mt={2}
-          >
-            A adoção é um ato de amor que transforma vidas. Seu novo melhor
-            amigo está esperando por você.
+          <br />
+          <Typography variant="h6" color="text.secondary" mb={4}>
+            Junte-se a nós na missão de encontrar lares para nossos amigos de quatro patas.
           </Typography>
+
+          <Typography
+            variant="body1"
+            textAlign="center"
+            color="text.secondary"
+            mb={2}
+          >
+            Se você representa uma <strong>ONG</strong> e quer fazer parte deste projeto de adoção, cadastre sua instituição abaixo.
+            <br />
+            Caso já tenha uma conta :{" "}
+            <Link style={{ color: "#0921f7ff", textDecoration: "underline", fontWeight: "bold" }} to="/sessions">
+              login/Cadastro
+            </Link>
+          </Typography>
+
         </Container>
       </Box>
 
@@ -134,6 +166,33 @@ export const HomePage = () => {
         onClose={() => setIsModalOpen(false)}
       />
 
+      {/* <Box
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          zIndex: 999,
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={handleCadastroONG}
+          sx={{
+            borderRadius: "50%",
+            width: "60px",
+            height: "60px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h6" color="white" fontWeight="bold">
+            ONG
+          </Typography>
+        </Button>
+      </Box> */}
     </Box>
   )
 }
