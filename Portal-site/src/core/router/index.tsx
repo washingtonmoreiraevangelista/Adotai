@@ -4,6 +4,8 @@ import { PetsPage } from '../../pages/pet/pet'
 import { HorizontalScroll } from '../../components/scroll/horizontalScrollSection'
 import { AdoptPage } from '../../pages/adoted/adopt'
 import { LoginRegisterSplit } from '../../pages/register/register'
+import { RegisterPetPage } from '../../pages/profile/profile'
+import { PrivateLayout } from '../layout'
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -18,9 +20,9 @@ export const AppRouter = () => (
 
 
       {/* Rotas privadas */}
-      {/* <Route element={<PrivateLayout />}>
-        <Route path="/profile" element={<ProfilePage />} />
-      </Route> */}
+      <Route element={<PrivateLayout />}>
+        <Route path="/profile" element={<RegisterPetPage />} />
+      </Route>
     </Routes>
   </BrowserRouter>
 )

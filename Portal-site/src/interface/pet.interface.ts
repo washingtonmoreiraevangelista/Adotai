@@ -1,5 +1,5 @@
 export interface Pet {
-  id: string
+  id?: string
   name?: string
   description?: string
   type?: string
@@ -8,6 +8,7 @@ export interface Pet {
   size?: string
   city?: string
   adopted?: boolean
+   photoUrl?: string
   org?: {
     phoneNumber: string
     name?: string

@@ -5,7 +5,7 @@ export const petsService = {
 
   async createPet(data: Pet) {
     try {
-      const response = await environment('/api/pet', 'POST', data)
+      const response = await environment('/pet/register', 'POST', data)
       return response
     } catch (error) {
       throw new Error('Erro ao criar o pet')

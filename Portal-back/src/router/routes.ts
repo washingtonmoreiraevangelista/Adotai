@@ -11,7 +11,7 @@ export async function routes(app: FastifyInstance) {
 
   app.patch('/token/refresh', refresh)
   app.post('/register', register)
-  app.get('/profile', getProfile)
+  app.get('/profile/:id', getProfile)
   app.post('/sessions', authenticate)
 
   // Pets

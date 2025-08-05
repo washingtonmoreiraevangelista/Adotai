@@ -59,12 +59,12 @@ export const LoginRegisterSplit = () => {
       const response = await ongService.login({ email, password })
       if (response?.token) {
         localStorage.setItem("token", response.token)
-        navigate("/homePage")
+        navigate("/profile")
       } else {
-        setError("Nome ou senha incorretos")
+        setError("Email ou senha incorretos")
       }
     } catch {
-      setError("Nome ou senha incorretos")
+      setError("Email ou senha incorretos")
     } finally {
       setIsLoading(false)
     }
@@ -136,6 +136,11 @@ export const LoginRegisterSplit = () => {
     }
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate("/login")
+  }
+
   return (
     <Box
       sx={{
@@ -201,13 +206,14 @@ export const LoginRegisterSplit = () => {
             <Collapse in={tab === 0} timeout={400} unmountOnExit>
               <form onSubmit={handleSubmit}>
                 <TextField
-                  label="Nome de usuário"
+                  label="Email "
                   variant="outlined"
+                  type='email'
                   fullWidth
                   margin="normal"
                   required
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">

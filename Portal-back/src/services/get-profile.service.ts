@@ -8,8 +8,8 @@ export class GetProfile {
     private userOngsRepository: OngsRepository
   ) { }
 
-  async execute({ userId }: GetProfileRequest): Promise<GetProfileResponse> {
-    const user = await this.userOngsRepository.findById(userId)
+  async execute({ userId: id }: GetProfileRequest): Promise<GetProfileResponse> {
+    const user = await this.userOngsRepository.findById(id)
 
     if (!user) {
       throw new ResourceNotFoundError()

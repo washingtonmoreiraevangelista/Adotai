@@ -14,7 +14,7 @@ export async function registerPet(request: FastifyRequest, reply: FastifyReply) 
     description: z.string(),
     type: PetTypeEnum,
     raca: z.string(),
-    age: z.string(),
+    age: z.number().min(1),
     city: z.string(),
     size: PetSizeEnum,
   })
@@ -29,12 +29,14 @@ export async function registerPet(request: FastifyRequest, reply: FastifyReply) 
   const repository = new PetRepository()
   const service = new RegisterPet(repository, ongsRepository)
 
+  const ageString = age.toString()
+
   await service.create({
     name,
     description,
     type,
     raca,
-    age,
+    age: ageString,
     city: city.toLowerCase().replace(/\s/g, ''),
     size,
     adopted: false,

@@ -3,7 +3,7 @@ import { environment } from '../tools/axiosInstance'
 
 export const ongService = {
 
- async register(data: CreateOng){
+  async register(data: CreateOng) {
     try {
       const response = await environment('/register', 'POST', data)
       return response
@@ -15,12 +15,12 @@ export const ongService = {
 
   async login(data: { email: string; password: string }) {
     try {
-      const response = await environment('/api/sessions', 'POST', data)
+      const response = await environment('/sessions', 'POST', data)
       return response
     } catch (error) {
       console.error('Erro ao fazer login:', error)
       throw new Error('Erro ao fazer login')
     }
-  }
+  },
 
 }
